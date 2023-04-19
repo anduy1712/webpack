@@ -10,27 +10,29 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.m?js$/,
+        test: /\.m?js|\jsx$/,
         include: path.resolve(__dirname, 'src'),
         exclude: /node_modules/,
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              ['@babel/preset-env', {
-                "targets": "defaults" 
-              }],
-              '@babel/preset-react'
-            ]
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                [
+                  '@babel/preset-env',
+                  {
+                    targets: 'defaults'
+                  }
+                ],
+                '@babel/preset-react'
+              ]
+            }
           }
-        }]
+        ]
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
+        use: ['style-loader', 'css-loader']
       }
     ]
   },
@@ -41,7 +43,8 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      src: path.resolve(__dirname, './src')
-    }
+      pages: path.resolve(__dirname, 'src/pages')
+    },
+    extensions: ['.jsx', '.js']
   }
 };
